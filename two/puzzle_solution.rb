@@ -36,9 +36,6 @@ class CubeGame
           end
         end
       end
-      min_red.nil? || min_red == 0 ? min_red = 1 : nil
-      min_green.nil? || min_green == 0 ? min_green = 1 : nil
-      min_blue.nil? || min_blue == 0 ? min_blue = 1 : nil
       valid << {game: game_num, red: min_red, green: min_green, blue: min_blue}
     end
 
