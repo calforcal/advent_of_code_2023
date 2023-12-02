@@ -13,26 +13,38 @@ class CubeGame
       rounds = separate_heading[1].split("; ")
 
       good = true
+      min_red = 0
+      min_green = 0
+      min_blue = 0
+
       rounds.each do |round|
-        min_red = 0
-        min_green = 0
-        min_blue = 0
         scores = round.split(", ")
         scores.each do |score|
           color_pairs = score.split(" ")
-          if color_pairs[1] == "red" && color_pairs[0].to_i > 12
-            good = false
-          elsif color_pairs[1] == "green" && color_pairs[0].to_i > 13
-            good = false
-          elsif color_pairs[1] == "blue" && color_pairs[0].to_i > 14
-            good = false
+          if color_pairs[1] == "red"
+            if min_red < color_pairs[0].to_i
+              min_red = color_pairs[0].to_i
+            end
+          elsif color_pairs[1] == "green"
+            if min_green < color_pairs[0].to_i
+              min_green = color_pairs[0].to_i
+            end
+          elsif color_pairs[1] == "blue"
+            if min_blue < color_pairs[0].to_i
+              min_blue = color_pairs[0].to_i
+            end
           end
         end
       end
-      good ? valid << game_num : nil
+      min_red.nil? || min_red == 0 ? min_red = 1 : nil
+      min_green.nil? || min_green == 0 ? min_green = 1 : nil
+      min_blue.nil? || min_blue == 0 ? min_blue = 1 : nil
+      valid << {game: game_num, red: min_red, green: min_green, blue: min_blue}
     end
 
-    valid.sum { |score| score }
+    # valid.sum { |score| score[:game] }
+    valid.sum { |score| score[:red] * score[:green] * score[:blue]}
+    # valid
   end
 end
 
