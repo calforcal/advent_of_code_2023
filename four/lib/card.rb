@@ -27,4 +27,16 @@ class Card
     nums = split_nums[1].split(" ")
     nums.map { |num| num.to_i }
   end
+
+  def points_for_card
+    total = 0
+    game_nums.each do |num|
+      if winning_nums.include?(num) && total == 0
+        total += 1
+      elsif winning_nums.include?(num) && total > 0
+        total *= 2
+      end
+    end
+    total
+  end
 end
