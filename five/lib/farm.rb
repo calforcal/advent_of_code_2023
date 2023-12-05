@@ -1,0 +1,116 @@
+class Farm
+  def initialize(file)
+    @lines = File.readlines(file).map do |line|
+      line.chomp!
+    end
+  end
+
+  def all_info
+    i = 0
+    info = {}
+    while i < @lines.length
+      if i == 0
+        info[:seeds] = extract_seeds_info
+        i += 1
+      elsif @lines[i] == "seed-to-soil map:"
+        i += 1
+        info[:seed_to_soil] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:seed_to_soil] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "soil-to-fertilizer map:"
+        i += 1
+        info[:soil_to_fertilizer] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:soil_to_fertilizer] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "fertilizer-to-water map:"
+        i += 1
+        info[:fertilizer_to_water] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:fertilizer_to_water] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "water-to-light map:"
+        i += 1
+        info[:water_to_light] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:water_to_light] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "light-to-temperature map:"
+        i += 1
+        info[:light_to_temperature] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:light_to_temperature] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "temperature-to-humidity map:"
+        i += 1
+        info[:temperature_to_humidity] = []
+        while /\d/.match?(@lines[i][-1])
+          info[:temperature_to_humidity] << extract_info(@lines[i])
+          i += 1
+        end
+      elsif @lines[i] == "humidity-to-location map:"
+        i += 1
+        info[:humidity_to_location] = []
+        while @lines[i] != nil && /\d/.match?(@lines[i][-1])
+          info[:humidity_to_location] << extract_info(@lines[i])
+          i += 1
+        end
+      end
+      i += 1
+    end
+    info
+  end
+
+  def extract_seeds_info
+    split_nums = @lines[0].split(" ")
+    nums = split_nums.map { |num| num.to_i }
+    nums.drop(1)
+  end
+
+  def extract_info(line)
+    info = line.split(" ")
+    {
+      source: info[1].to_i,
+      destination: info[0].to_i,
+      range: info[2].to_i
+    }
+  end
+
+  def chart_map(chart)
+    info = all_info
+    info[chart]
+  end
+
+  def conversion(seed, chart)
+    chart_map(chart).each do |chart|
+      if seed >= chart[:source] && seed <= (chart[:source] + chart[:range] - 1)
+        return seed + (chart[:destination] - chart[:source])
+      end
+    end
+    seed
+  end
+
+  def seed_to_location(seed)
+    soil = conversion(seed, :seed_to_soil)
+    fertilizer = conversion(soil, :soil_to_fertilizer)
+    water = conversion(fertilizer, :fertilizer_to_water)
+    light = conversion(water, :water_to_light)
+    temperature = conversion(light, :light_to_temperature)
+    humidity = conversion(temperature, :temperature_to_humidity)
+    location = conversion(humidity, :humidity_to_location)
+  end
+
+  def minimum_distance
+    seeds = extract_seeds_info
+    min_distance = {}
+    seeds.map do |seed|
+      min_distance[seed] = seed_to_location(seed)
+    end.min
+  end
+end
