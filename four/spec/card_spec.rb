@@ -22,4 +22,11 @@ RSpec.describe Card do
       expect(card_2.points_for_card).to eq(2)
     end
   end
+
+  describe "#matches_for_card" do
+    it "can calculate the matches for one card" do
+      expect(card.matches_for_card).to eq(4)
+      expect(card_2.matches_for_card).to eq(2)
+    end
+  end
 end

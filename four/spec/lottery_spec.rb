@@ -17,4 +17,21 @@ RSpec.describe Lottery do
       expect(lottery.total_points_in_deck).to eq(13)
     end
   end
+
+  describe "#total_points_with_bonus_copies" do
+    it "should calculate all the instances of the cards, with bonus copies, etc.." do
+      expect(lottery.total_cards_instances).to eq(30)
+    end
+  end
+
+  describe "#card_plus_bonus" do
+    it "will get the instances of one card path" do
+      bonus_map = {}
+      lottery.cards.each_with_index do |card, index|
+        bonus_map[index] = card.matches_for_card
+      end
+
+      expect(lottery.card_plus_bonus(0, bonus_map)).to eq(15)
+    end
+  end
 end

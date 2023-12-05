@@ -1,8 +1,18 @@
 class Card
-  attr_reader :card
+  attr_reader :card, 
+              :get_card_heading, 
+              :winning_nums, 
+              :game_nums, 
+              :points_for_card, 
+              :matches_for_card
+              
   def initialize(data)
     @data = data
     @card = get_card_heading
+    @winning_nums = winning_nums
+    @game_nums = game_nums
+    @points_for_card = points_for_card
+    @matches_for_card = matches_for_card
   end
 
   def split_card
@@ -15,7 +25,7 @@ class Card
   end
 
   def split_nums
-    all_nums = split_card[1].split("|")
+    split_card[1].split("|")
   end
 
   def winning_nums
@@ -38,5 +48,9 @@ class Card
       end
     end
     total
+  end
+
+  def matches_for_card
+    game_nums.count { |num| winning_nums.include?(num) }
   end
 end
