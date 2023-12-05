@@ -73,6 +73,21 @@ class Farm
     nums.drop(1)
   end
 
+  def get_seeds_range
+    seeds = extract_seeds_info
+    range_seeds = []
+    i = 0
+    j = 1
+
+    while j < seeds.length
+      range = (seeds[i]...(seeds[i] + seeds[j])).to_a
+      range_seeds << range
+      i += 2
+      j += 2
+    end
+    range_seeds.flatten
+  end
+
   def extract_info(line)
     info = line.split(" ")
     {
@@ -108,6 +123,14 @@ class Farm
 
   def minimum_distance
     seeds = extract_seeds_info
+    min_distance = {}
+    seeds.map do |seed|
+      min_distance[seed] = seed_to_location(seed)
+    end.min
+  end
+
+  def range_minimum_distance
+    seeds = get_seeds_range
     min_distance = {}
     seeds.map do |seed|
       min_distance[seed] = seed_to_location(seed)

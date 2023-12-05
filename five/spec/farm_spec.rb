@@ -115,5 +115,17 @@ RSpec.describe Farm do
     it "should take in all seeds, and return the minimum distance" do
       expect(farm.minimum_distance).to eq(35)
     end
+
+    it "should take in the range of seeds and return the minimum distance" do
+      expect(farm.range_minimum_distance).to eq(46)
+    end
+  end
+
+  describe "#get_seeds_range" do
+    it "should get all the seeds within the range" do
+      a_1 = (79..92).to_a
+      a_2 = (55..67).to_a
+      expect(farm.get_seeds_range).to eq([a_1, a_2].flatten)
+    end
   end
 end
