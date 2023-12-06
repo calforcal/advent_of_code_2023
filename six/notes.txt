@@ -1,0 +1,20 @@
+Values we need to extract
+- The races: i.e time (ms)
+- Current MAX distance (record)
+
+Storing these as a hash map probably the best way to do lookups
+
+Classes 
+- RaceDay
+
+Problem: Construct a method that iterates through each race (and its record) and counts the
+number of different ways you can beat the record
+
+Intuition: Start in the middle of the given race time, and work out from there, if you find
+a strategy that is worse than the record, stop moving in that direction.
+
+Methods we could build
+- One Larger one that iterates through the races and their records, this one will handle
+all the major functionality, by calling helper methods.
+- Parsing the information given in the txt file.
+- Calculate the distance based on time holding and travelling, might be a boolean return?
