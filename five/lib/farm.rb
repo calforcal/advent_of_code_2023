@@ -1,3 +1,4 @@
+require 'pry'
 class Farm
   def initialize(file)
     @lines = File.readlines(file).map do |line|
@@ -73,6 +74,8 @@ class Farm
     nums.drop(1)
   end
 
+
+
   def get_seeds_range
     seeds = extract_seeds_info
     range_seeds = []
@@ -86,6 +89,17 @@ class Farm
       j += 2
     end
     range_seeds.flatten
+  end
+
+  def get_seeds_no_range
+    seeds = extract_seeds_info
+    i = 0
+    no_range = []
+    while i < seeds.length
+      no_range << seeds[i]
+      i += 2
+    end
+    no_range
   end
 
   def extract_info(line)
@@ -102,8 +116,8 @@ class Farm
     info[chart]
   end
 
-  def conversion(seed, chart)
-    chart_map(chart).each do |chart|
+  def conversion(seed, chart_type)
+    chart_map(chart_type).each do |chart|
       if seed >= chart[:source] && seed <= (chart[:source] + chart[:range] - 1)
         return seed + (chart[:destination] - chart[:source])
       end
@@ -121,19 +135,40 @@ class Farm
     location = conversion(humidity, :humidity_to_location)
   end
 
+  # def minimum_distance
+  #   seeds = extract_seeds_info
+  #   min_distance = {}
+  #   seeds.each do |seed|
+  #     min_distance[seed] = seed_to_location(seed)
+  #   end
+  #   min_distance
+  # end
+
   def minimum_distance
-    seeds = extract_seeds_info
+    all_seeds = extract_seeds_info
+    seed = range_minimum_distance
+    range_index = all_seeds.index(seed[0]) + 1
+
+    seeds = (seed[0]...all_seeds[range_index]).to_a
+
     min_distance = {}
     seeds.map do |seed|
-      min_distance[seed] = seed_to_location(seed)
+      seed_to_location(seed)
     end.min
   end
 
   def range_minimum_distance
-    seeds = get_seeds_range
+    seeds = get_seeds_no_range
     min_distance = {}
-    seeds.map do |seed|
+    seeds.each do |seed|
       min_distance[seed] = seed_to_location(seed)
-    end.min
+    end
+    min_distance.min_by { |k,v| v}
+  end
+
+  def find_minimum_conversion
+    chart_map(:seed_to_soil).min_by do |hash|
+      hash[:destination] + hash[:range]
+    end
   end
 end

@@ -1,6 +1,7 @@
 require "./four/lib/card.rb"
 require "./four/lib/lottery.rb"
 require "./five/lib/farm.rb"
+require 'pry'
 
 # lottery = Lottery.new("./four/fixtures/data.txt")
 # lottery = Lottery.new("./four/fixtures/half_data.txt")
@@ -18,4 +19,12 @@ require "./five/lib/farm.rb"
 # p lottery.card_plus_bonus(1, bonus_map)
 
 farm = Farm.new("./five/data/data.txt")
-p farm.minimum_distance
+puts farm.minimum_distance
+# p farm.range_minimum_distance
+
+# p farm.extract_seeds_info.length
+# p farm.get_seeds_range.length
+
+# p farm.find_minimum_conversion
+
+# farm.seed_to_location(172346126)
