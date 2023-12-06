@@ -19,6 +19,12 @@ RSpec.describe RaceDay do
     end
   end
 
+  describe "#the_race" do
+    it "can parse the data to return one big race" do
+      expect(race_day.the_race).to eq({ 71530 => 940200 })
+    end
+  end
+
   describe "#beats_record?" do
     it "can calculate if a given strategy beats the record" do
       expect(race_day.beats_record?(1, 7, 9)).to be(false)
@@ -36,6 +42,12 @@ RSpec.describe RaceDay do
   describe "#product_of_record_beaters" do
     it "can return the product of all the different ways to beat a races record" do
       expect(race_day.product_of_record_beaters).to eq(288)
+    end
+  end
+
+  describe "#ways_to_beat_the_big_race" do
+    it "can return the number of ways to beat the big race record" do
+      expect(race_day.ways_to_beat_record(71530, 940200)).to eq(71503)
     end
   end
 end

@@ -14,6 +14,12 @@ class RaceDay
     race_map
   end
 
+  def the_race
+    times = @lines[0].scan(/\d+/)
+    distances = @lines[1].scan(/\d+/)
+    { times.join.to_i => distances.join.to_i }
+  end
+
   def beats_record?(hold_time, race_time, record)
     distance = hold_time * (race_time - hold_time)
     distance > record

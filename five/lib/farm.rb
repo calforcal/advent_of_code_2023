@@ -135,27 +135,25 @@ class Farm
     location = conversion(humidity, :humidity_to_location)
   end
 
-  # def minimum_distance
-  #   seeds = extract_seeds_info
-  #   min_distance = {}
-  #   seeds.each do |seed|
-  #     min_distance[seed] = seed_to_location(seed)
-  #   end
-  #   min_distance
-  # end
-
   def minimum_distance
-    all_seeds = extract_seeds_info
-    seed = range_minimum_distance
-    range_index = all_seeds.index(seed[0]) + 1
-
-    seeds = (seed[0]...all_seeds[range_index]).to_a
-
-    min_distance = {}
+    seeds = extract_seeds_info
     seeds.map do |seed|
       seed_to_location(seed)
     end.min
   end
+
+  # def minimum_distance
+  #   all_seeds = extract_seeds_info
+  #   seed = range_minimum_distance
+  #   range_index = all_seeds.index(seed[0]) + 1
+
+  #   seeds = (seed[0]...all_seeds[range_index]).to_a
+
+  #   min_distance = {}
+  #   seeds.map do |seed|
+  #     seed_to_location(seed)
+  #   end.min
+  # end
 
   def range_minimum_distance
     seeds = get_seeds_no_range
