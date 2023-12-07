@@ -3,6 +3,8 @@ require "./four/lib/card.rb"
 require "./four/lib/lottery.rb"
 require "./five/lib/farm.rb"
 require "./six/lib/race_day.rb"
+require "./seven/lib/game.rb"
+require "./seven/lib/hand.rb"
 require 'pry'
 
 puts ""
@@ -65,3 +67,15 @@ record = real_data.values.first
 puts "PART TWO"
 puts ""
 puts "Ways to beat THE RACE record: #{race_day.ways_to_beat_record(time, record)}"
+
+puts ""
+puts "----------DAY 7 SOLUTIONS----------"
+puts ""
+game = Game.new("./seven/data/data.txt")
+puts "{PART ONE}"
+puts ""
+puts "Sum of Hands: #{game.sum_rank_and_bet}"
+puts ""
+puts "PART TWO"
+puts ""
+puts ""
