@@ -1,3 +1,4 @@
+require "./three/lib/engine.rb"
 require "./four/lib/card.rb"
 require "./four/lib/lottery.rb"
 require "./five/lib/farm.rb"
@@ -10,7 +11,9 @@ puts "----------DAY 3 SOLUTIONS----------"
 puts ""
 puts "{PART ONE}"
 puts ""
-puts "Total"
+engine = Engine.new("./three/data/data.txt")
+puts "Sum of Valid Parts: #{engine.sum_valid_parts}"
+p engine.valid_parts
 
 
 puts ""

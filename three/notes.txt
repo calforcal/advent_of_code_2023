@@ -1,0 +1,22 @@
+Classes: Engine
+
+Important Values we need to extract: Numbers from each line 
+(or maybe just their index + length)
+
+First thing we need to do is Extract the Part Numbers
+
+- We'll scan each line of the file by initializing an engine class.
+- Then we'll build a method that scans each line and returns the index + length of Numbers
+
+Next we needa a method that can validate the position of each of the numbers found
+- We'll iterate through the numbers found (double iteration i think)
+- For each "line" of numbers found
+  - We'll check each of the numbers byits position and length
+  For Length == 3
+    [[-1, -1], [-1, 0], [-1, 1], [-1, 2], [-1, 3], [0, 3], [1, 3], [1, 2], [1, 1], [1, 0], [1, -1], [0, -1]]
+    [[-1, -1], [-1, 0], [-1, 1], [-1, 2], [0, 2], [1, 2], [1, 1], [1, 0], [1, -1], [0, -1]]
+    [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
+
+    Iterate through each of these, if one of them is a symbol return true
+    If iteration finishes, return false
+
