@@ -1,0 +1,35 @@
+Import the File through an initialize method
+  - Parsing is simple here, can split each line on space, convert [1] to integer.
+  - Leaves us with an array or 2 element arrays, one string (hand) and one int (bet)
+
+Maybe there is Two Classes?
+  - Game: Collection of all the hands, would handle things like sorting the hands etc.
+  - Hand: Would store, "cards", bet, and type_of_hand (based on cards)
+
+Hands Class
+  - Initialize with a line(string)
+  - Attribute/Method of #cards = parse string[0] iterate through each to turn string into
+an array of numbers (annoying up front but should help sort later)
+  - Attribute/Method of #bet = parse string[1] to int.
+  - Attribute/Method of #hand_type - based on the cards given.
+
+  Other Methods (Helpers)
+    - check_hand: potentially map cards to a hash - maybe to store them as cards.
+      - five_of_a_kind
+      - four_of_a_kind
+      - full_house
+      - three_of_a_kind
+      - two_pair
+      - one_pair
+      - high_card
+
+    - compare_high_cards
+
+Game Class
+  - initialize with a file
+  - convert file to @hands (array of hands objects)
+
+  - sort_hands
+  - sort_bucket_by_type
+  - multiply_bet_by_rank
+  - sum_rank_times_bet
