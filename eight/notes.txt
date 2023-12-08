@@ -1,0 +1,14 @@
+Readlines using .scan to match on 3 letter sequences
+  - shift the first line to be the 'directions'
+  For the REST
+  - el[0] will be key, and [el[1], el[2]] are the coordinates to follow (l, r)
+
+
+Step through the directions until you either reach ZZZ
+
+
+Class Map
+- Parse for directions
+- Map the other lines to a Hash
+- @count to track steps?
+- step_counter method?
