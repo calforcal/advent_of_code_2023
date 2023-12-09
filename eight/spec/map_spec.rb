@@ -29,4 +29,29 @@ RSpec.describe Map do
       expect(map.navigate).to eq(6)
     end
   end
+
+  describe "PART 2 TESTING" do
+    let!(:file) { "./data/test_data_two.txt" }
+    let!(:map) { Map.new(file) }
+
+    describe "#get_starting_points" do
+      it "can get all starting nodes (ending in A)" do
+        expect(map.get_starting_points).to eq(["11A", "22A"])
+      end
+    end
+
+    describe "#step_and_check" do
+      it "can take a list of points, and determine if their next step results in all Zs" do
+        guide = map.guide
+        expect(map.step_and_check("L", map.get_starting_points, guide)).to eq(["11B", "22B"])
+        expect(map.step_and_check("R", ["11B", "22C"], guide)).to eq(true)
+      end
+    end
+
+    describe "#multi_path_navigation" do
+      it "can simultaneously navigate two paths to Z-Coordinates" do
+        expect(map.multi_path_navigation).to eq(6)
+      end
+    end
+  end
 end

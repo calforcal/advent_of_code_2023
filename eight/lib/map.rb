@@ -45,4 +45,37 @@ class Map
 
     return point
   end
+
+  def multi_path_navigation
+    guide = self.guide
+    count = 0
+    result = get_starting_points
+    i = 0
+
+    until result == true
+      count += 1
+      result = step_and_check(directions[i], result, guide)
+      if i >= directions.length - 1 then i = 0 else i += 1 end
+    end
+    count
+  end
+
+  def step_and_check(direction, points, guide)
+    all_z = true
+    new_points = points.map do |point|
+      if direction == "L"
+        point = guide[point][0]
+        all_z = false if point[-1] != "Z"
+      elsif direction == "R"
+        point = guide[point][1]
+        all_z = false if point[-1] != "Z"
+      end
+      point
+    end
+    all_z ? all_z : new_points
+  end
+
+  def get_starting_points
+    guide.keys.select { |key| key[-1] == "A" }
+  end
 end
