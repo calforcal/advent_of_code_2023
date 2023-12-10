@@ -57,4 +57,45 @@ class Engine
   def length_1
     [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]]
   end
+
+  def star_parts
+    stars = []
+    @components.each_with_index do |line, i|
+      line.chars.each_with_index do |char, j|
+        if char == "*"
+          stars << star_biopsy(i, j)
+        end
+      end
+    end
+    stars.select { |arr| arr.length > 1 }
+  end
+
+  def sum_star_products
+    star_parts.sum { |arr| arr[0] * arr[1] }
+  end
+
+  def touching_star?(line, j)
+    nums = []
+    line.enum_for(:scan, /\d{1,3}/).each do |char|
+      begin_index = Regexp.last_match.begin(0) - 1 < 0 ? 0 : Regexp.last_match.begin(0) - 1
+      end_index = begin_index + Regexp.last_match.to_s.length
+      if j >= begin_index && j <= end_index
+        nums.append(char.to_i)
+      end
+    end
+    nums
+  end
+
+  def star_biopsy(i, j)
+    collector = []
+    top = @components[i - 1][j - 3, j + 3]
+    middle = @components[i][j - 3, j + 3]
+    bottom = @components[i + 1][j - 3, j + 3]
+
+    collector << touching_star?(top, j)
+    collector << touching_star?(middle, j)
+    collector << touching_star?(bottom, j)
+
+    collector.flatten!
+  end
 end

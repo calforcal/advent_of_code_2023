@@ -17,7 +17,12 @@ puts "{PART ONE}"
 puts ""
 engine = Engine.new("./three/data/data.txt")
 puts "Sum of Valid Parts: #{engine.sum_valid_parts}"
-p engine.valid_parts
+puts ""
+puts "{PART TWO}"
+puts ""
+puts "Sum of Star Parts: #{engine.sum_star_products}"
+puts ""
+# p engine.star_parts
 
 
 puts ""

@@ -35,4 +35,16 @@ RSpec.describe Engine do
       expect(engine.sum_valid_parts).to eq(4361)
     end
   end
+
+  describe "#star_parts" do
+    it "can find two parts adjacent to the same * in the schematic" do
+      expect(engine.star_parts).to eq([[467, 35], [755, 598]])
+    end
+  end
+
+  describe "#sum_star_products" do
+    it "can sum all the star parts found" do
+      expect(engine.sum_star_products).to eq(467835)
+    end
+  end
 end
