@@ -19,12 +19,12 @@ class Engine
         return true if /[$&+,:;=?@#|\/'<>^*()%!-]/.match?(@components[i + coord[0]][j_arr[0] + coord[1]])
       end
     elsif j_arr[1] == 2
-      length_3.each do |coord|
+      length_2.each do |coord|
         next if @components[i + coord[0]].nil? || @components[i + coord[0]][j_arr[0] + coord[1]].nil?
         return true if /[$&+,:;=?@#|\/'<>^*()%!-]/.match?(@components[i + coord[0]][j_arr[0] + coord[1]])
       end
     elsif j_arr[1] == 1
-      length_3.each do |coord|
+      length_1.each do |coord|
         next if @components[i + coord[0]].nil? || @components[i + coord[0]][j_arr[0] + coord[1]].nil?
         return true if /[$&+,:;=?@#|\/'<>^*()%!-]/.match?(@components[i + coord[0]][j_arr[0] + coord[1]])
       end
