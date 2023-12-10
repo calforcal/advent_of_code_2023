@@ -6,6 +6,7 @@ require "./six/lib/race_day.rb"
 require "./seven/lib/game.rb"
 require "./seven/lib/hand.rb"
 require "./eight/lib/map.rb"
+require "./nine/lib/report.rb"
 require 'pry'
 
 puts ""
@@ -94,3 +95,15 @@ puts "PART TWO"
 puts ""
 # puts "Simultaneous Steps to Z Nodes: #{map.multi_path_navigation}"
 puts ""
+
+puts ""
+puts "----------DAY 9 SOLUTIONS----------"
+puts ""
+report = Report.new("./nine/data/data.txt")
+puts "{PART ONE}"
+puts ""
+puts "Sum of Next in Sequence: #{report.sum_all_sequences}"
+puts ""
+puts "PART TWO"
+puts ""
+puts "Sum of Reverse Next in Sequence: #{report.reverse_sum_all_sequences}"

@@ -1,0 +1,19 @@
+Class Report
+
+@documents = readlines / split on space
+
+Method to Handle solving one "document"
+  - the final_arr
+  - while collector array (last array.uniq.length) is 
+  - latest = []
+  - i = 0
+  - j = 1
+  - while j < last_arr.length
+    push arr[j] - arr[i] to latest
+  - push latest to collector
+
+  while length of collector > 1
+    - collector[-2] push collector[-2][-1] + collector[-1][-1]
+    - collector.pop
+
+  collector.first[-1]
